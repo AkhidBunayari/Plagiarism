@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class KeywordController extends Controller
@@ -10,15 +10,9 @@ class KeywordController extends Controller
     	return view('plagiarism.keywords');
     }
 
-    public function ajaxKeywords() {
-
-    	if(isset($_GET['fileName'])) {
-    		
-    		$data = fopen($_GET['fileName'],'r');
-    		foreach($data as $line)
-			{
-			   echo $line .'<br>';
-			}
-    	}
+    public function ajaxKeywords(Request $request) {
+        $input = $request->all();
+        $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
+        echo $input['image'];
     }
 }

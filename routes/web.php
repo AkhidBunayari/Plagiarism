@@ -17,6 +17,6 @@ Route::get('/', ['as'=>'index', 'uses' => 'HomeController@index']);
 
 
 Route::get('upload/keywords', ['as' => 'getkeywords', 'uses' => 'keywordController@index']);
-Route::get('upload/keywords/loadding', ['as' => 'postkeywords', 'uses' => 'keywordController@ajaxKeywords']);
+Route::post('upload/keywords', ['as' => 'postkeywords', 'uses' => 'keywordController@ajaxKeywords']);
 
 Route::get('load/db', 'HomeController@loadDB');
