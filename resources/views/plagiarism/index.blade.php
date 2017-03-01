@@ -29,77 +29,65 @@
                 </div>
             </div>
         </div>
-</header>
+    </header>
     <div class="container" style="padding-top: 20px">
         <div class="row">
-        <div class="col-lg-12" >
-            <div class="panel panel-default" >
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                <fieldset>
-                                    
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="Nom22">Chọn chủ đề</label>
-                                        <div class="col-md-4">
-                                            <input id='txtCategory' class="form-control" list="categorys" name="browser" placeholder="Kiểm tra với chủ đề">
-                                            <datalist id="categorys">
-                                                <option value="Công Nghệ Thông Tin">
-                                                <option value="Chính Trị">
-                                                <option value="Du Lịch">
-                                                <option value="Hoá Học">
-                                                <option value="Hình Học">
-                                                <option value="Kinh Tế">
-                                                <option value="Khoa Học">
-                                                <option value="Lịch Sử">
-                                                <option value="Tin Học">
-                                                <option value="Toán Tin">
-                                                <option value="Vật Lý">
-                                                <option value="Văn Học">
-                                                <option value="Thế Giới">
-                                                <option value="Tiểu Thuyết">
-                                                <option value="Xã Hội">
-                                            </datalist>
+            <div class="col-lg-12" >
+                <div class="panel panel-default" >
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="Nom22">Chọn chủ đề</label>
+                                            <div class="col-md-4">
+                                                <input id='txtCategory' class="form-control" list="categorys" name="browser" placeholder="Kiểm tra với chủ đề">
+                                                <datalist id="categorys">
+                                                    <option value="Công Nghệ Thông Tin">
+                                                    <option value="Chính Trị">
+                                                    <option value="Du Lịch">
+                                                    <option value="Hoá Học">
+                                                    <option value="Hình Học">
+                                                    <option value="Kinh Tế">
+                                                    <option value="Khoa Học">
+                                                    <option value="Lịch Sử">
+                                                    <option value="Tin Học">
+                                                    <option value="Toán Tin">
+                                                    <option value="Vật Lý">
+                                                    <option value="Văn Học">
+                                                    <option value="Thế Giới">
+                                                    <option value="Tiểu Thuyết">
+                                                    <option value="Xã Hội">
+                                                </datalist>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="Nom22">Chọn file: </label>  
-                                        <div class="col-md-4">
-                                            <input type="file" class="file" name="fImage">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="Nom22">Chọn file: </label>  
+                                            <div class="col-md-4">
+                                                <input type="file" class="file" name="fImage">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-                                             <div id="loading"></div>
-                                             <div  id="data"></div>
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                 <div id="loading"></div>
+                                                 <div  id="data"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    
-
-                                    <!-- Button -->
-                                    <div class="form-group">
-                                      <label class="col-md-4 control-label" for="send"></label>
-                                      <div class="col-md-4">
-                                       
-                                        
-                                    </div>
-                                </div>
-
-                            </fieldset>
-                        </form>
-<button id="uploadFile" name="insertNews" class="btn btn-primary">Kiểm tra</button>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="send"></label>
+                                            <div class="col-md-4">
+                                                <button id="uploadFile" name="insertNews" class="btn btn-primary">Kiểm tra</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- /.row (nested) -->
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
     </div>
     <script>
         function reSize() {

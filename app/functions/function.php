@@ -96,4 +96,26 @@ function moveFile($request, $fileName, $unlink = false, $fileDel)
     return "lib/keywords" . $txtFile;
 }
 
+function showError($data) {
+	echo "<div id='messages'>";
+	foreach ($data as $item) {
+		echo "<div class='alert alert-danger'>". $item ."</div>";
+	}
+	echo "</div>";
+}
+
+function readDocx($name){
+	$fileName = getSourceUpload(). "/" . $name;
+	$t = shell_exec(getPython() . '/readDocx.py '. $fileName);
+    return $t;
+}
+
+function getPython() {
+	return 'C:\Python27\python C:\xampp\htdocs\Plagiarism\python';
+}
+
+function getSourceUpload() {
+	return 'C:\xampp\htdocs\Plagiarism\public\plagiarism\uploads';
+}
+
 ?>

@@ -1,67 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Laravel 5 - Ajax Image Uploading Tutorial</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <meta name="_token" content="{{ csrf_token() }}"/>
+    <base href="{{ asset('/') }}" />
+    <title>Plagiarism Checker DTU</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="DTU icon" href="plagiarism/images/DTU.ICO">
+    <!-- Styles -->
+    <link href="plagiarism/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="plagiarism/css/myStyle.css">
 </head>
 <body>
-
-<div class="container">
-  <h1>Laravel 5 - Ajax Image Uploading Tutorial</h1>
-
-  <form action="{{ route('postkeywords') }}" enctype="multipart/form-data" method="POST">
-
-    <div class="alert alert-danger print-error-msg" style="display:none">
-        <ul></ul>
+    <header>
+        <div class="container-fluid">
+            <div class="row zsx">
+                <div class="col-lg-12 animated lightSpeedIn">
+                    <p class="vcenter">
+                    <h1> HỆ THỐNG SO KHỚP TÀI LIỆU</h1>
+                    <h3>Duy Tân University</h3>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container" style="padding-top: 20px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Nom22">Chọn chủ đề</label>
+                            <div class="col-md-4">
+                                <input id='txtCategory' class="form-control" list="categorys" name="browser" placeholder="Kiểm tra với chủ đề">
+                                <datalist id="categorys">
+                                    <option value="Công Nghệ Thông Tin">
+                                    <option value="Chính Trị">
+                                    <option value="Du Lịch">
+                                    <option value="Hoá Học">
+                                    <option value="Hình Học">
+                                    <option value="Kinh Tế">
+                                    <option value="Khoa Học">
+                                    <option value="Lịch Sử">
+                                    <option value="Tin Học">
+                                    <option value="Toán Tin">
+                                    <option value="Vật Lý">
+                                    <option value="Văn Học">
+                                    <option value="Thế Giới">
+                                    <option value="Tiểu Thuyết">
+                                    <option value="Xã Hội">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Nom22">Chọn file: </label>  
+                            <div class="col-md-4">
+                                <input type="file" id="file1"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12" id="result" style="text-align: center; margin: 1em 0;">
+                                 <!-- <img src="plagiarism/images/processing.gif"/> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="send"></label>
+                            <div class="col-md-4">
+                                <button id="uploadFile" name="insertNews" class="btn btn-primary">Kiểm tra</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-    <div class="form-group">
-      <label>Alt Title:</label>
-      <input type="text" name="title" class="form-control" placeholder="Add Title">
-    </div>
-
-    <div class="form-group">
-      <label>Image:</label>
-      <input type="file" name="image" class="form-control">
-    </div>
-
-    <div class="form-group">
-      <button class="btn btn-success upload-image" type="submit">Upload Image</button>
-    </div>
-
-  </form>
-
-</div>
-
-<script type="text/javascript">
-  $("body").on("click",".upload-image",function(e){
-    $(this).parents("form").ajaxForm(options);
-  });
-
-  var options = { 
-    complete: function(response) 
-    {
-        if($.isEmptyObject(response.responseJSON.error)){
-            $("input[name='title']").val('');
-            alert('Image Upload Successfully.');
-        }else{
-            console.log(response);
-        }
-    }
-  };
-
-  function printErrorMsg (msg) {
-    $(".print-error-msg").find("ul").html('');
-    $(".print-error-msg").css('display','block');
-    $.each( msg, function( key, value ) {
-        $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+    
+<!-- JavaScripts -->
+<script src="plagiarism/js/jquery-1.11.2.min.js"></script>
+<script src="plagiarism/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="plagiarism/js/resize.js"></script>
+<script>
+    var filename = '';
+    
+    $('#uploadFile').click(function () {
+        upload();
     });
-  }
+    function upload() {
+        var file_data = $('#file1').prop('files')[0];
+        var txtCate = $('#txtCategory').val();
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        form_data.append('txtCategory', txtCate);
+        $.ajaxSetup({
+            headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+        });
+        $('#result').html('<img src="plagiarism/images/processing.gif"/>');
+        $.ajax({
+            url: "{{url('upload/keywords')}}", // point to server-side PHP script
+            data: form_data,
+            type: 'POST',
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData: false,
+            success: function (data) {
+                if (data.fail) {
+                    /*$('#result').html('<img src="plagiarism/images/error.gif"/>');*/
+                    $('#result').html(data.errors['file']);
+                    /*alert(data.errors['file']);*/
+                }
+                else {
+                    filename = data;
+                    $('#result').html(data);
+                }
+            },
+            error: function (xhr, status, error) {
+               /* alert(xhr.responseText);*/
+                $('#result').html(xhr.responseText);
+            }
+        });
+    }
+    function removeFile() {
+        if (filename != '')
+            if (confirm('Are you sure want to remove profile picture?'))
+                $.ajax({
+                    url: "{{url('upload/keywords')}}/" + filename, // point to server-side PHP script
+                    type: 'GET',
+                    contentType: false,       // The content type used when sending data to the server.
+                    cache: false,             // To unable request pages to be cached
+                    processData: false,
+                    success: function (data) {
+                        $('#result').html('<img width="100%" height="100%" src="plagiarism/images/default.jpg"/>');
+                        filename = '';
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+    }
 </script>
-
 </body>
 </html>
