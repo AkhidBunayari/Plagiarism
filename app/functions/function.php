@@ -103,10 +103,15 @@ function showError($data) {
 	}
 	echo "</div>";
 }
+function showMessage() {
+	if(session('flash_message')) {
+		echo "<div class='alert alert-" . Session::get('flash_level') ."' role='alert' id='messages'>" . Session::get('flash_message') . "</div>";
+	}
+}
 
-function readDocx($name){
+function readDocx($name, $topic){
 	$fileName = getSourceUpload(). "/" . $name;
-	$t = shell_exec(getPython() . '/readDocx.py '. $fileName);
+	$t = shell_exec(getPython() . '/readDocx.py '. $fileName . ' ' . $topic);
     return $t;
 }
 

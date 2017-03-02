@@ -1,31 +1,25 @@
 # -*- coding: utf8 -*-
 import sys
 import codecs
-from docx import Document
+import lib
 
 sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 sys.stdin = codecs.getreader('utf_8')(sys.stdin)
 
-# nhan reqest PHP
-string = ''
-for word in sys.argv[1:]:
-    string += word + ' '
+list = lib.getRequest(sys.argv[1:])	
+resultDocx = lib.readDocx(list[0])	
 
-# doc file docx dua ket qua vao strInput
-strInput = ''
-	
-document = Document(string)
-for para in document.paragraphs:
-	strInput = strInput + ' ' + para.text
 
-strInput = strInput.lower()
-	
-# doc tuong dong file keyword	
-file = open("C:\\xampp\\htdocs\\Plagiarism\\python\\CNTT.txt", "r") 
-for line in file: 
-	key = line.lstrip().rstrip().decode('utf_8')
-	strInput = strInput.replace(key, u"a")
+listPara = resultDocx.split(u"endpara")
 
+para = ''
+
+for s in listPara:
+	keywords = lib.getKeyword(lib.readTxt(list[1]), s)
+	content = lib.getContent(lib.readTxt(list[1]), s)
 	
-print strInput
-	
+	keywords = '<Keywords>' + keywords + '</Keywords>'
+	content = '<Content>' + content + '</Content>'
+	para = para + '<Para>' + keywords + content + '</Para>'
+
+print para

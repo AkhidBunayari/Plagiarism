@@ -38,7 +38,7 @@ class UserController extends Controller
 
     public function postLogin(Request $request) {
     	if(Auth::attempt(['username' => $request->txtUserName, 'password' => $request->txtPass])) {
-    		return redirect('upload/keywords');
+    		return redirect('check/plagiarism');
     	}else {
     		return redirect('login');
     	}

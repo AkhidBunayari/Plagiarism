@@ -24,6 +24,27 @@
             </div>
         </div>
     </header>
+     <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#zsxnavcollapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+        <!-- <a class="navbar-brand" href="#top">TheBombHome</a> -->
+            </div>
+            <div class="collapse navbar-collapse pull-right" id="zsxnavcollapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="check/plagiarism">Plagiarism</a></li>
+                    <li><a href="add/user">Thành viên</a></li>
+                    <li><a href="keywords">Keywords</a></li>
+                    <li><a href="logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container" style="padding-top: 20px">
         <div class="row">
             <div class="col-lg-12">

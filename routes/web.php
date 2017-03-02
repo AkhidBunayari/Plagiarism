@@ -20,14 +20,18 @@ Route::post('login', ['as' => 'postLogin', 'uses' => 'UserController@postLogin']
 
 
 Route::group(['prefix' => '/', 'middleware' => 'loginSystem'], function() {
-	Route::get('upload/keywords', ['as' => 'getkeywords', 'uses' => 'keywordController@index']);
-	Route::post('upload/keywords', ['as' => 'postkeywords', 'uses' => 'keywordController@ajaxKeywords']);
-	Route::get('upload/keywords/{filename}', 'keywordController@getRemoveFile');
+	Route::get('check/plagiarism', ['as' => 'getkeywords', 'uses' => 'CheckController@index']);
+	Route::post('check/plagiarism', ['as' => 'postkeywords', 'uses' => 'CheckController@ajaxKeywords']);
+	Route::get('check/plagiarism/{filename}', 'CheckController@getRemoveFile');
 
 
 	// User manager
 	Route::get('add/user', ['as' => 'getAdd', 'uses' => 'UserController@getAdd']);
 	Route::post('add/user', ['as' => 'postAdd', 'uses' => 'UserController@postAdd']);
+
+	//Keywords
+	Route::get('keywords', ['as' => 'getkeywords', 'uses' => 'HomeController@getKeywords']);
+	Route::post('keywords', ['as' => 'postkeywords', 'uses' => 'HomeController@postKeywords']);
 
 	Route::get('logout', 'UserController@logout');
 });
