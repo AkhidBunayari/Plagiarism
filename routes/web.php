@@ -13,8 +13,6 @@
 
 
 
-
-
 Route::get('login', ['as' => 'login', 'uses' => 'UserController@index']);
 Route::post('login', ['as' => 'postLogin', 'uses' => 'UserController@postLogin']);
 
@@ -32,6 +30,10 @@ Route::group(['prefix' => '/', 'middleware' => 'loginSystem'], function() {
 	//Keywords
 	Route::get('keywords', ['as' => 'getkeywords', 'uses' => 'HomeController@getKeywords']);
 	Route::post('keywords', ['as' => 'postkeywords', 'uses' => 'HomeController@postKeywords']);
+
+	//File
+	Route::get('files', ['as' => 'getInfo', 'uses' => 'FileController@getContentFile']);
+
 
 	Route::get('logout', 'UserController@logout');
 });

@@ -109,9 +109,15 @@ function showMessage() {
 	}
 }
 
-function readDocx($name, $topic){
+function readParaDocx($name, $topic){
 	$fileName = getSourceUpload(). "/" . $name;
-	$t = shell_exec(getPython() . '/readDocx.py '. $fileName . ' ' . $topic);
+	$t = shell_exec(getPython() . '/readParaDocx.py '. $fileName . ' ' . $topic);
+    return $t;
+}
+
+function readTableDocx($name, $topic){
+	$fileName = getSourceUpload(). "/" . $name;
+	$t = shell_exec(getPython() . '/readTableDocx.py '. $fileName . ' ' . $topic);
     return $t;
 }
 

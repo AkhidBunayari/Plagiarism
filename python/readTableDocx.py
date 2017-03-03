@@ -7,14 +7,10 @@ sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
 sys.stdin = codecs.getreader('utf_8')(sys.stdin)
 
 list = lib.getRequest(sys.argv[1:])
-	
-Paragraph = lib.readDocxParagraph(list[0])	
-listPara = Paragraph.split(u"endpara")
 
 Table = lib.readDocxTable(list[0])
 listTable = Table.split(u"endpara")
 
-para = lib.convertXML(listPara, list[1])
 table = lib.convertXML(listTable, list[1])
 
-print para + "/n" + table
+print table
